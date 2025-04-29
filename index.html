@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Task Rewards Mini App</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Taski Mini App</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Monetag Ad Script -->
+  <script async="async" data-cfasync="false" src="https://jsc.adskeeper.co.uk/monetag/show_9273434.js"></script>
 </head>
 <body>
-    <div id="app">
-        <h1>Task Rewards</h1>
-        <p id="points">Points: 0</p>
-        <button onclick="completeTask()">Complete Task</button>
-        <button onclick="claimBonus()">Claim Bonus</button>
-    </div>
+  <div class="container">
+    <h1>Welcome to Taski</h1>
+    <p>Click the button below to complete a task and earn rewards:</p>
+    <button id="completeBtn">✅ Complete Task</button>
+    <p id="status" style="margin-top: 20px; font-weight: bold;"></p>
+  </div>
 
-    <script src="script.js"></script>
-
-    <!-- Load your Monetag ad script zone (important) -->
-    <script src="https://upgulpinon.com/1?z=9273434" async></script>
+  <script>
+    document.getElementById("completeBtn").addEventListener("click", function () {
+      const status = document.getElementById("status");
+      status.innerText = "Loading ad...";
+      show_9273434().then(() => {
+        status.innerText = "✅ Task Completed! You earned 1 coin.";
+      }).catch(() => {
+        status.innerText = "⚠️ Ad not available. Please try again later.";
+      });
+    });
+  </script>
 </body>
 </html>
