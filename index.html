@@ -1,26 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Taski Ad Test</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script async="async" data-cfasync="false" src="https://jsc.adskeeper.co.uk/monetag/show_9273434.js"></script>
+  <meta charset="UTF-8">
+  <title>Taski - Earn by Watching Ads</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Monetag SDKs -->
+  <script src='//whephiwums.com/sdk.js' data-zone='9273434' data-sdk='show_9273434'></script>
+  <script src='//whephiwums.com/sdk.js' data-zone='9273436' data-sdk='show_9273436'></script>
+  <script src='//whephiwums.com/sdk.js' data-zone='9273437' data-sdk='show_9273437'></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f4f6fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .button {
+      padding: 14px 28px;
+      margin: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      transition: background 0.2s ease;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-size: 15px;
+      color: #444;
+    }
+  </style>
 </head>
-<body style="text-align: center; padding-top: 100px;">
-  <h1>Taski Ad Test</h1>
-  <button onclick="loadAd()">Show Ad</button>
-  <p id="status"></p>
+<body>
+
+  <h1>Welcome to Taski</h1>
+  <p>Earn rewards by watching ads</p>
+
+  <button class="button" onclick="loadInterstitialAd()">Rewarded Interstitial</button>
+  <button class="button" onclick="loadPopupAd()">Rewarded Popup</button>
+  <button class="button" onclick="loadInAppAd()">In-App Interstitial</button>
+
+  <div id="status"></div>
 
   <script>
-    function loadAd() {
-      document.getElementById("status").innerText = "Loading ad...";
+    function loadInterstitialAd() {
+      document.getElementById("status").innerText = "Loading interstitial ad...";
       show_9273434().then(() => {
-        document.getElementById("status").innerText = "✅ Ad watched!";
-      }).catch((e) => {
-        document.getElementById("status").innerText = "❌ Failed to load ad.";
-        console.error(e);
+        document.getElementById("status").innerText = "✅ Interstitial completed. Reward user.";
+      }).catch(() => {
+        document.getElementById("status").innerText = "❌ Ad skipped or failed.";
+      });
+    }
+
+    function loadPopupAd() {
+      document.getElementById("status").innerText = "Loading rewarded popup...";
+      show_9273436('pop').then(() => {
+        document.getElementById("status").innerText = "✅ Popup ad finished. Reward user.";
+      }).catch(() => {
+        document.getElementById("status").innerText = "❌ Popup ad skipped or failed.";
+      });
+    }
+
+    function loadInAppAd() {
+      document.getElementById("status").innerText = "Triggering in-app interstitial...";
+      show_9273437({
+        type: 'inApp',
+        inAppSettings: {
+          frequency: 2,
+          capping: 0.1,
+          interval: 30,
+          timeout: 5,
+          everyPage: false
+        }
       });
     }
   </script>
+
 </body>
 </html>
