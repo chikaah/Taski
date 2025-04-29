@@ -2,30 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Taski Mini App</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Monetag Ad Script -->
+  <title>Taski Ad Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script async="async" data-cfasync="false" src="https://jsc.adskeeper.co.uk/monetag/show_9273434.js"></script>
 </head>
-<body>
-  <div class="container">
-    <h1>Welcome to Taski</h1>
-    <p>Click the button below to complete a task and earn rewards:</p>
-    <button id="completeBtn">✅ Complete Task</button>
-    <p id="status" style="margin-top: 20px; font-weight: bold;"></p>
-  </div>
+<body style="text-align: center; padding-top: 100px;">
+  <h1>Taski Ad Test</h1>
+  <button onclick="loadAd()">Show Ad</button>
+  <p id="status"></p>
 
   <script>
-    document.getElementById("completeBtn").addEventListener("click", function () {
-      const status = document.getElementById("status");
-      status.innerText = "Loading ad...";
+    function loadAd() {
+      document.getElementById("status").innerText = "Loading ad...";
       show_9273434().then(() => {
-        status.innerText = "✅ Task Completed! You earned 1 coin.";
-      }).catch(() => {
-        status.innerText = "⚠️ Ad not available. Please try again later.";
+        document.getElementById("status").innerText = "✅ Ad watched!";
+      }).catch((e) => {
+        document.getElementById("status").innerText = "❌ Failed to load ad.";
+        console.error(e);
       });
-    });
+    }
   </script>
 </body>
 </html>
