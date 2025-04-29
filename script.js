@@ -50,4 +50,4 @@ show_9273434({
     timeout: 5, 
     everyPage: false 
   } 
-});￼Enter
+});
